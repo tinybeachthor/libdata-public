@@ -1,0 +1,38 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: cargo build --verbose
+
+    - name: Run tests
+      run: >-
+        cargo test
+        --verbose
+
+    - uses: browser-actions/setup-geckodriver@latest
+
+    - name: Setup wasm build
+      run: |
+        rustup target add wasm32-unknown-unknown
+        cargo install -f wasm-bindgen-cli
+
+    - name: Run wasm tests
+      run: |
+        cd libdata-wasm
+        make test
