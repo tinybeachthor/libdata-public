@@ -1,0 +1,10 @@
+[package]
+name = "random-access-storage"
+version = "4.0.0"
+license = "MIT OR Apache-2.0"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.24"

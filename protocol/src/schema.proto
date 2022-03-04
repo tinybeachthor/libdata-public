@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+//! message schema for hypercore replication protocol
+package hypercore.schema;
+
+// Sent as part of the noise protocol.
+message NoisePayload {
+  // noise nonce
+  required bytes nonce = 1;
+}
+
+// type=0
+message Open {
+  // [crate::DiscoveryKey]
+  required bytes discoveryKey = 1;
+  // used to verify the remote knows the public [crate::Key]
+  optional bytes capability = 2;
+}
+
+// type=1, explicitly close a channel
+message Close {
+  // [crate::DiscoveryKey]
+  required bytes discoveryKey = 1;
+}
+
+// type=2, ask for data
+message Request {
+  // index
+  required uint32 index = 1;
+}
+
+// type=3, send some data
+message Data {
+  // index
+  required uint32 index = 1;
+  // data
+  required bytes data = 2;
+  // data signature
+  required bytes data_signature = 4;
+  // tree signature
+  required bytes tree_signature = 5;
+}

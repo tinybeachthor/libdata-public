@@ -1,0 +1,17 @@
+[workspace]
+
+members = [
+  "libdata-wasm",
+  "libdata",
+  "datacore",
+  "protocol",
+  "random-access-disk",
+  "random-access-memory",
+  "random-access-storage",
+]
+
+[profile.release]
+lto = true
+
+[profile.release.package.libdata-wasm]
+opt-level = 's'
